@@ -4,7 +4,6 @@ import UserDetails from './UserDetails';
 import Content from './Content';
 
 function App() {
-
   const mockupData = {
         'id': 1,
         'name': 'Leanne Graham',
@@ -29,14 +28,14 @@ function App() {
         }
       }
 
-      const [data, setData] = useState(mockupData)
+  const [data, setData] = useState(mockupData)
 
-    return (
-      <div className='main'>
-        <UserDetails data = {data} />
-        <Content />
-      </div>
-    );    
-  }
+  return (
+    <div className='main'>
+      <UserDetails data = {data} />
+      <Content />
+    </div>
+  );    
+}
 
 export default App;

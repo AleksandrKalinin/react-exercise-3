@@ -21,3 +21,9 @@
   width: 100%;
   object-fit: cover;
 }
+
+.return-button {
+	display: block;
+	width: 150px;
+	margin: 20px auto;
+}
