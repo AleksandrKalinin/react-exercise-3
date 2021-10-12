@@ -1,22 +1,16 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import UserInfo from './UserInfo';
 import Avatar from './Avatar';
 import {Container, Row, Col} from 'react-bootstrap';
 
-class UserDetails extends Component {
+function UserDetails(props) {
 
-  constructor(props){
-    super(props);
-    this.state = {
+  const [data, setData] = useState(props.data);
 
-    }
-  }
+  useEffect(() => {
+    setData(props.data)
+  }, [props.data])
 
-  componentDidMount() {
-    console.log(this.props);
-  }
-
-  render() {
     return (
       <Container>
         <Row>
@@ -24,13 +18,11 @@ class UserDetails extends Component {
             <Avatar />
           </Col>
           <Col> 
-            <UserInfo data={this.props.data} />
+            <UserInfo data={data} />
           </Col>      
         </Row>
       </Container> 
     );
   }
-
-}
 
 export default UserDetails;

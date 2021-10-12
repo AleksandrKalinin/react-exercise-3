@@ -1,27 +1,24 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import {Container, Row, Col, Table} from 'react-bootstrap';
 import axios from 'axios';
 
-class Content extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      albums: [],
-      isLoaded: false
-    }
-  }
+function Content() {
+  const [albums, setAlbums] = useState([]);
+  const [isSuccesful, setStatus] = useState(false);
 
-  componentDidMount(){
-    axios.get('https://jsonplaceholder.typicode.com/albums')
-    .then((res) => this.setState({ albums: [], isLoaded: true }, ()=>console.log(this.state) ))
-  }
+  useEffect(() => {
+  	axios.get('https://jsonplaceholder.typicode.com/albums')
+    .then((res) => { 
+    	setStatus(true);
+    	setAlbums(res.data)
+      })
+  },[])
 
-  render(){
     return (
       <Container>
         <Row>
           <Col>
-            {this.state.isLoaded ?
+            {isSuccesful ?
               <Table striped bordered hover size="sm">
                 <thead>
                   <tr>
@@ -30,7 +27,7 @@ class Content extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {this.state.albums.map((item, index) => 
+                  {albums.map((item, index) => 
                     <tr key={item.id}>
                     <td>{item.id}</td>
                     <td>{item.title}</td>
@@ -44,6 +41,5 @@ class Content extends Component {
       </Container>
     );
   }
-}
 
 export default Content;

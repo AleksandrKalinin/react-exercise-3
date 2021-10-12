@@ -1,13 +1,11 @@
-import { Component } from 'react';
+import { useState} from 'react';
 import './App.css';
 import UserDetails from './UserDetails';
 import Content from './Content';
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      data: {
+function App() {
+
+  const mockupData = {
         'id': 1,
         'name': 'Leanne Graham',
         'username': 'Bret',
@@ -30,17 +28,15 @@ class App extends Component {
           'bs': 'harness real-time e-markets'
         }
       }
-    }
-  }
 
-  render(){
+      const [data, setData] = useState(mockupData)
+
     return (
       <div className='main'>
-        <UserDetails data = {this.state.data} />
+        <UserDetails data = {data} />
         <Content />
       </div>
     );    
   }
-}
 
 export default App;

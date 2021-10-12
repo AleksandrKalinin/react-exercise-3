@@ -1,47 +1,35 @@
-import { Fragment, Component } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 
-class UserInfo extends Component {
+function UserInfo(props) {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      data: this.props.data
-    };
+  const [isOpen, setVisibility] = useState(false);
+  const [data, setData] = useState(props.data)
+
+  useEffect(() => {
+    setData(props.data);
+  },[props.data])
+
+  function changeVisibility() {
+    setVisibility(!isOpen);
   }
 
-  componentDidMount(){
-    this.setState({
-      data: this.props.data
-    })
-  }
-
-
-  setVisibility = () => {
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
-  }
-
-  render() {
-    return (
+     return (
       <div>    
-        <p><span className="bold">Name: </span>{this.state.data.name}</p>
-        <p><span className="bold">Username: </span>{this.state.data.username}</p>
-        <p><span className="bold">Email: </span>{this.state.data.email}</p>
-        {this.state.isOpen ?
+        <p><span className="bold">Name: </span>{data.name}</p>
+        <p><span className="bold">Username: </span>{data.username}</p>
+        <p><span className="bold">Email: </span>{data.email}</p>
+        {isOpen ?
           <>
-            <p><span className="bold">Phone </span>{this.state.data.phone}</p>
-            <p><span className="bold">Website: </span>{this.state.data.website}</p>
-            <p><span className="bold">City: </span>{this.state.data.address.city}</p>
-            <p><span className="bold">Address: </span>{this.state.data.address.street}</p>
+            <p><span className="bold">Phone </span>{data.phone}</p>
+            <p><span className="bold">Website: </span>{data.website}</p>
+            <p><span className="bold">City: </span>{data.address.city}</p>
+            <p><span className="bold">Address: </span>{data.address.street}</p>
           </>
         : null}
-        <Button onClick = {this.setVisibility}>{!this.state.isOpen ? 'More information' : 'Less information' }</Button>
+        <Button onClick = {changeVisibility}>{isOpen ? 'Less information' : 'More information' }</Button>
       </div>
     );
   }
-}
 
 export default UserInfo;
