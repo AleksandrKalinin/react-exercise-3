@@ -9,6 +9,8 @@ function Content() {
   const [photos, fetchPhotos] = useState([]);
   const [photosShown, openPhotos] = useState(false);
 
+  const [currentAlbum, setCurrentAlbum] = useState(null);
+
   useEffect(() => {
   	axios.get('https://jsonplaceholder.typicode.com/albums')
     .then((res) => { 
@@ -21,6 +23,7 @@ function Content() {
     axios.get(`https://jsonplaceholder.typicode.com/photos?albumId=${id}`)
       .then((res) => {
         fetchPhotos(res.data);
+        setCurrentAlbum(id);
         openPhotos(true);
       })
   }
@@ -55,6 +58,9 @@ function Content() {
           <Row>
             <Col md={12} lg={12} xs={12} style={{ justifyContent: 'center' }}>
               <Button onClick={() => openPhotos(false)} className="return-button">Back to albums</Button>
+            </Col>
+            <Col md={12} lg={12} xs={12} style={{ justifyContent: 'center' }}>
+              <p className="current-album">Photos for album {currentAlbum}</p>
             </Col>
             {photos.map((item) => 
               <Col md={4} lg={4} xs={4} key={item.id}>

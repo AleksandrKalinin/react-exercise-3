@@ -27,3 +27,9 @@
 	width: 150px;
 	margin: 20px auto;
 }
+
+.current-album {
+	text-align: center;
+	font-size: 20px;
+	padding: 24px 0;
+}
